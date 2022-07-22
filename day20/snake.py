@@ -66,7 +66,7 @@ class Snake:
         self.head = self.segments[0]
 
     def extend(self):
-        self.add_segment(self.segments[-1].position)
+        self.add_segment(self.segments[-1].position())
 
 
 
