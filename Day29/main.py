@@ -132,7 +132,7 @@ generate_button = tkinter.Button(text="Create Password", width=13, command=lambd
 generate_button.grid(row=3, column=2)
 
 # create add password button
-add_button = tkinter.Button(text="Add Password", width=42, command=add)
+add_button = tkinter.Button(text="Add Password", width=42)
 add_button.grid(row=4, column=1, columnspan=3)
 
 # add password search button
