@@ -1,53 +1,65 @@
 import tkinter
 import pandas as pd
+import random
 
 BACKGROUND_COLOR = "#B1DDC6"
 FONT_FRENCH = ("Arial", 40, "italic")
 FONT_ENGLISH = ("Arial", 40, "italic")
 FONT_WORD = ("Arial", 60, "bold")
 SECONDS_START = 5
-french_label = ""
-french_word = ""
-english_label = ""
-english_word = ""
-vocab = {}
+
 # Read the French Word files
-vocab_table = pd.read_csv("french_words.csv")
+try:
+    vocab_table = pd.read_csv("words_to_learn.csv")
+except FileNotFoundError:
+    vocab_table = pd.read_csv("french_words.csv")
+    vocab_table = vocab_table.to_dict(orient="records")
+else:
+    vocab_table = vocab_table.to_dict(orient="records")
 
 
 # ----------------------------------------- count down function -----------------------------------------
-def fresh_word():
-    global vocab
-    vocab = {pair.French: pair.English for (index, pair) in vocab_table.sample().iterrows()}
-    canvas.create_image(400, 265, image=front)
-    global french_label, french_word
-    french_label = canvas.create_text(400, 150, text="French", font=FONT_FRENCH)
-    french_word = list(vocab.keys())[0]
-    print(f"french word is {french_word}")
-    french_word = canvas.create_text(400, 263, text=french_word, font=FONT_WORD)
+def next_card():
+    global vocab, timer
+    root.after_cancel(timer)
+    vocab = random.choice(vocab_table)
+    canvas.itemconfig(canvas_img, image=front)
+    canvas.itemconfig(card_title, text="French")
+    canvas.itemconfig(card_word, text=vocab["French"])
     count_down(SECONDS_START)
 
 
 # ----------------------------------------- count down function -----------------------------------------
 def count_down(seconds):
-    print(f"{seconds} seconds remaining")
     if seconds > 0:
+        global timer
         root.after(1000, count_down, seconds-1)
     else:
         # flip the flash card
-        canvas.delete(french_label)
-        canvas.delete(french_word)
+        canvas.itemconfig(card_title, text="")
+        canvas.itemconfig(card_word, text="")
         flip()
 
 
 # ----------------------------------------- flip the card -----------------------------------------
 def flip():
-    global vocab, english_word
-    english_word = list(vocab.values())[0]
-    back = tkinter.PhotoImage(file="images/card_back.png")
-    canvas.create_image(400, 265, image=back)
-    canvas.create_text(400, 150, text="English", font=FONT_ENGLISH)
-    canvas.create_text(400, 263, text=english_word, font=FONT_WORD)
+    global vocab
+    canvas.itemconfig(canvas_img, image=back)
+    canvas.itemconfig(card_title, text="English")
+    canvas.itemconfig(card_word, text=vocab["English"])
+
+
+# ----------------------------------------- correct_button -----------------------------------------
+def correct_button():
+    vocab_table.remove(vocab)
+    print(f"{len(vocab_table)} words left")
+    next_card()
+
+
+# ----------------------------------------- wrong_button -----------------------------------------
+def wrong_button():
+    pd.DataFrame.from_dict(vocab_table).to_csv("words_to_learn.csv")
+    next_card()
 
 
 # Create window
@@ -55,23 +67,28 @@ root = tkinter.Tk()
 root.title("Flashy")
 root.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 
+# initialize a random word to display on window
+vocab = random.choice(vocab_table)
+timer = root.after(5000, func=flip)
+
 # Create canvas widget in the window, show French title and French word
 canvas = tkinter.Canvas(root, width=800, height=525)
 front = tkinter.PhotoImage(file="images/card_front.png")
-img = canvas.create_image(400, 265, image=front)
-text1 = canvas.create_text(400, 150, text="French", font=FONT_FRENCH)
-text2 = canvas.create_text(400, 263, text="French Word", font=FONT_WORD)
+back = tkinter.PhotoImage(file="images/card_back.png")
+canvas_img = canvas.create_image(400, 265, image=front)
+card_title = canvas.create_text(400, 150, text="French", font=FONT_FRENCH)
+card_word = canvas.create_text(400, 263, text=vocab["French"], font=FONT_WORD)
 canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
 canvas.grid(row=0, column=0, columnspan=2)
 
 # Create button for right
 r_img = tkinter.PhotoImage(file="images/right.png")
-r_button = tkinter.Button(root, image=r_img, highlightthickness=0, command=fresh_word)
+r_button = tkinter.Button(root, image=r_img, highlightthickness=0, command=correct_button)
 r_button.grid(row=1, column=1)
 
 # Create Button for wrong
 w_img = tkinter.PhotoImage(file="images/wrong.png")
-w_button = tkinter.Button(root, image=w_img, highlightthickness=0)
+w_button = tkinter.Button(root, image=w_img, highlightthickness=0, command=wrong_button)
 w_button.grid(row=1, column=0)
 
 
