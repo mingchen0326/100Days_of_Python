@@ -1,6 +1,7 @@
+import os
 import html
-
 import requests
+from twilio.rest import Client
 from function import will_get_news, cleanhtml, get_msg_content
 
 
@@ -21,8 +22,11 @@ stock_data.raise_for_status()
 # extract closing price from yesterday and the day before
 daily_data = stock_data.json()["Time Series (Daily)"]
 data_date = list(daily_data.keys())
+# yesterday = daily_data[data_date[0]]
+# day_before = daily_data[data_date[1]]
 yesterday = daily_data[data_date[0]]
-day_before = daily_data[data_date[1]]
+day_before = daily_data["2022-06-13"]
+
 
 # whether will get news base on closing stock price
 percent_diff = will_get_news(yesterday, day_before)
@@ -49,19 +53,19 @@ msg_content = get_msg_content(percent_diff, headline, brief)
 print(msg_content)
 
 
-
-
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number.
+account_sid = "Your accoun_sid from dashboard"
+auth_token = "Your auth_token from dashboard"
+twilio_phone_number = "Your twilio phone number"
 
+if msg_content != -1:
+    client = Client(account_sid, auth_token)
+    message = client.messages \
+        .create(
+        body=f"{msg_content}",
+        from_=twilio_phone_number,
+        to='the phone number you want to send message to'
+    )
+    print(message.status)
 
-#Optional: Format the SMS message like this:
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""

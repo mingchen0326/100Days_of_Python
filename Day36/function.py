@@ -27,4 +27,4 @@ def get_msg_content(percent_diff, headline, brief):
                       f"Brief: {brief}"
         return msg_content
     else:
-        return "No significant change in Tesla stock price"
+        return -1
