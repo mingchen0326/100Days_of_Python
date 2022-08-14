@@ -1,10 +1,11 @@
 import requests
+import os
 from datetime import datetime
 
 ## Step 1: create username
-pixela_endpoint = "https://pixe.la/v1/users"
-TOKEN = "zjios21j1r1@32"
-USERNAME = "mingchen2189"
+pixela_endpoint = os.environ.get("PIXELA_ENDPOINT")
+TOKEN = os.environ.get("PIXELA_TOKEN")
+USERNAME = os.environ.get("PIXELA_USERNAME")
 
 
 user_params = {
@@ -18,7 +19,7 @@ user_params = {
 # print(response.text)
 
 ## Step 2: create a graph definition
-ID = "se29321"
+ID = os.environ.get("GRAPH_ID")
 ID_list = []
 
 graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
