@@ -34,7 +34,7 @@ class FlightSearch:
         self.location_response = requests.get(url=self.location_endpoint, params=self.location_params, headers=self.location_header)
         return self.location_response.json()
 
-    def search_flight(self, origin, designation):
+    def search_direct_flight(self, origin, designation):
         self.search_params = {
             "fly_from": origin,
             "fly_to": designation,
@@ -42,6 +42,21 @@ class FlightSearch:
             "date_to": self.format_date_to,
             "nights_in_dst_from": 14,
             "nights_in_dst_to": 21,
+            "max_stopovers": 0,
+            "curr": "GBP"
+        }
+        self.search_response = requests.get(url=self.search_endpoint, params=self.search_params, headers=self.search_header)
+        return self.search_response.json()
+
+    def search_stopover_flight(self, origin, designation):
+        self.search_params = {
+            "fly_from": origin,
+            "fly_to": designation,
+            "date_from": self.format_date_from,
+            "date_to": self.format_date_to,
+            "nights_in_dst_from": 14,
+            "nights_in_dst_to": 21,
+            "max_stopovers": 1,
             "curr": "GBP"
         }
         self.search_response = requests.get(url=self.search_endpoint, params=self.search_params, headers=self.search_header)

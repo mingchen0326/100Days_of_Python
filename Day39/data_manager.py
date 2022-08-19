@@ -5,21 +5,45 @@ import requests
 class DataManager:
 
     def __init__(self):
-        self.sheety_endpoint = os.environ.get("SHEETY_ENDPOINT")
-        self.get_response = ""
-        self.post_response = ""
-        self.put_response = ""
-        self.body = {}
+        # API credentials
+        self.flight_endpoint = os.environ.get("FLIGHT_ENDPOINT")
+        self.user_endpoint = os.environ.get("USER_ENDPOINT")
         self.header = {"Authorization": os.environ.get("SHEETY_TOKEN")}
 
-    def get_data(self):
-        self.get_response = requests.get(url=self.sheety_endpoint, headers=self.header)
-        return self.get_response.json()
+        # flight tab in google sheet
+        self.get_flight_response = ""
+        self.post_flight_response = ""
+        self.put_flight_response = ""
+        self.flight_body = {}
 
-    def post_data(self, body):
-        self.post_response = requests.post(url=self.sheety_endpoint, json=body, headers=self.header)
-        return self.post_response.text
+        # user tab in google sheet
+        self.get_user_response = ""
+        self.post_user_response = ""
+        self.put_user_response = ""
+        self.user_body = {}
 
-    def update_row(self, data, row_id):
-        self.put_response = requests.put(url=self.sheety_endpoint + f"/{row_id}", json=data, headers=self.header)
-        return self.put_response.text
+    def get_flight(self):
+        self.get_flight_response = requests.get(url=self.flight_endpoint, headers=self.header)
+        return self.get_flight_response.json()
+
+    def post_flight(self, flight_body):
+        self.post_flight_response = requests.post(url=self.flight_endpoint, json=flight_body, headers=self.header)
+        return self.post_flight_response.text
+
+    def update_flight(self, data, row_id):
+        self.put_flight_response = requests.put(url=self.flight_endpoint + f"/{row_id}", json=data, headers=self.header)
+        return self.put_flight_response.text
+
+    def get_user(self):
+        self.get_flight_response = requests.get(url=self.user_endpoint, headers=self.header)
+        return self.get_flight_response.json()
+
+    def post_user(self, user_body):
+        self.post_flight_response = requests.post(url=self.user_endpoint, json=user_body, headers=self.header)
+        return self.post_flight_response.text
+
+    def update_user(self, data, row_id):
+        self.put_flight_response = requests.put(url=self.user_endpoint + f"/{row_id}", json=data, headers=self.header)
+        return self.put_flight_response.text
+
+
