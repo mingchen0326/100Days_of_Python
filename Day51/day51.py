@@ -15,8 +15,8 @@ class InternetSpeedTweetterBot():
 
     def __init__(self, provider_down, provider_up):
         # load firefox webdriver
-        self.chrome_driver_path = r"C:\Users\m_j21\Desktop\Git\geckodriver.exe"
-        self.driver = webdriver.Firefox(executable_path=self.chrome_driver_path)
+        self.firefox_driver_path = r"C:\Users\m_j21\Desktop\Git\geckodriver.exe"
+        self.driver = webdriver.Firefox(executable_path=self.firefox_driver_path)
         self.provider_down = provider_down
         self.provider_up = provider_up
         self.test_down = 0
