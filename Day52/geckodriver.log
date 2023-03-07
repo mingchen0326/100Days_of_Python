@@ -889,8 +889,9 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 JavaScript warning: https://static.cdninstagram.com/rsrc.php/v3if8t4/yM/l/en_US/2ymNkCA5Ma0.js?_nc_x=Ij3Wp8lg5Kz, line 28: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
 JavaScript warning: https://static.cdninstagram.com/rsrc.php/v3if8t4/yM/l/en_US/2ymNkCA5Ma0.js?_nc_x=Ij3Wp8lg5Kz, line 28: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-1:63901
-1678063771295	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63902" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\m_j21\\AppData\\Local\\Temp\\rust_mozprofileGTuM7i"
+1678070591859	Marionette	INFO	Stopped listening on port 63746
+Dynamically enable window occlusion 1
+efox.exe" "--marionette" "--remote-debugging-port" "63902" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\m_j21\\AppData\\Local\\Temp\\rust_mozprofileGTuM7i"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
 1678063771716	Marionette	INFO	Marionette enabled
