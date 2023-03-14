@@ -119,8 +119,9 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://accounts.google.com."
 JavaScript warning: https://accounts.google.com/v3/signin/identifier?dsh=S1845879889%3A1678151808252128&continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSc9jdXoURbFVVqV3d5zb7TNnmPm8JOWZeqhJDSs70Y5XkymEw%2Fviewform%3Ffbzx%3D3725484035500338068&flowName=GlifWebSignIn&flowEntry=ServiceLogin&ifkv=AWnogHeOM-D6WbT5oNNppETAuZi-ZqZK0olOOoVJRz34rqS_V6wTF4zVyRWKw537SwA2Dll0wUpt line 326 > injectedScript line 2 > eval line 2913 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://accounts.google.com."
-1678151887656	geckodriver	INFO	Listening on 127.0.0.1:56566
-1678151890714	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56567" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\m_j21\\AppData\\Local\\Temp\\rust_mozprofile0JYfMT"
+1678153910547	Marionette	INFO	Stopped listening on port 56254
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56567" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\m_j21\\AppData\\Local\\Temp\\rust_mozprofile0JYfMT"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
 1678151890983	Marionette	INFO	Marionette enabled
