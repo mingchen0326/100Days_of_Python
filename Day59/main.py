@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 
 # get API url
@@ -20,8 +20,14 @@ def about_page():
     return render_template("about.html")
 
 
-@app.route("/contact")
+@app.route("/contact", methods=['GET', 'POST'])
 def contact_page():
+    if request.method == "POST":
+        data = request.form
+        non_empty = bool(data)
+        print(non_empty)
+        feedback_msg = "Successfully sent your message"
+        return render_template('contact.html', received=non_empty, feedback=feedback_msg)
     return render_template("contact.html")
 
 
@@ -29,7 +35,6 @@ def contact_page():
 def get_blog(blog_id):
     index = int(blog_id) - 1
     blog_post = content[index]
-
     return render_template("post.html", post=blog_post)
 
 
