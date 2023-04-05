@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
+
+<div>
+    <div class="container">
+        <h1 class="display-4">☕️Coffee & Wifi 💻</h1>
+        <h2 class="lead">Want to work in a cafe but need power and wifi?</h2>
+        <hr class="my-4">
+        <p class="description">You've found the right place! Checkout my collections of cafes with adata on power socket
+            availability. Wifi speed and coffee quality</p>
+        <a class="btn btn-warning btn-md" role="button" href=" {{ url_for('cafes') }} ">Show Me!</a>
+    </div>
+</div>
+{% endblock %}

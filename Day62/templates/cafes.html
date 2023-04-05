@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
+
+<div class="cafe-div">
+    <h1 class="h1 text-light">All Cafes</h1>
+    <hr>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th scope="col">Cafe Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Open</th>
+                <th scope="col">Close</th>
+                <th scope="col">Coffee</th>
+                <th scope="col">Wifi</th>
+                <th scope="col">Power</th>
+            </tr>
+        </thead>
+        {% for store in cafes %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ store['Cafe Name'] }}</th>
+                <td><a href="{{ store['Location'] }}" class="link text-warning">Maps Link</a></td>
+                <td>{{ store['Open'] }}</td>
+                <td>{{ store['Close'] }}</td>
+                <td>{{ store['Coffee'] }}</td>
+                <td>{{ store['Wifi'] }}</td>
+                <td>{{ store['Power'] }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('home') }}" class="text-warning ">Return to index page</a>
+    <a href="{{ url_for('add_store') }}" class="add-store btn btn-warning btn-md">Add New Store</a>
+</div>
+
+{% endblock %}

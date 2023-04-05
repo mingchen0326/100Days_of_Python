@@ -1,0 +1,49 @@
+body {
+    background-color: #2E3840;
+}
+
+.cafe-div {
+    text-align: center;
+}
+
+.table {
+    border-top: 1px solid white;
+}
+
+.cafe-div {
+    margin: 5% 5% 0%;
+}
+
+.container {
+    color: white;
+    text-align: center;
+    width: 75%;
+    padding: 10% 10%;
+}
+
+.add-store {
+    margin: 0% 5%;
+    text-align: center;
+}
+
+
+/* add.html - Form to add store */
+.new-cafe-form-div {
+    margin-left: 1%;
+}
+
+
+
+.new-entry-div {
+    width: 50%;
+}
+
+.input-title {
+    color: white;
+    margin: 1% 0% 0;
+}
+
+.new-cafe {
+    padding: 0 15%;
+}
+
