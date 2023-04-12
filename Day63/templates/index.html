@@ -10,7 +10,7 @@
     <ul>
         {% for book in bookshelf %}
         <li>
-            {{ book['book_name'] }} - {{ book['book_author'] }} - {{ book['book_rating'] }}/10
+            {{ book[0] }} - {{ book[1] }} - {{ book[2] }}/10
         </li>
         {% endfor %}
     </ul>
