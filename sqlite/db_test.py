@@ -32,4 +32,6 @@ with app.app_context():
     db.session.add(new_book)
     db.session.commit()
 
+    # read all books
     books = db.session.execute(db.select(Book)).scalars()
+    print(books)
