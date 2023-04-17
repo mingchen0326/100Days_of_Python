@@ -11,5 +11,5 @@ class EditForm(FlaskForm):
 
 # Create WTF form to add movie
 class AddForm(FlaskForm):
-    movie_title = StringField(label='movie_rating', validators=[DataRequired()], render_kw={"style": "width: 200px;"})
+    movie_title = StringField(label='movie_title', validators=[DataRequired()], render_kw={"style": "width: 200px;"})
     add_submit = SubmitField(label='Add Movie')
